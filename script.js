@@ -108,9 +108,9 @@ switch(spurning) {
 	
 	case 3: 
 		tala1 = randomNumber(1,10);
-		tala2 = randomNumber(1,10);
-		svar = prompt(`Hvað er ${tala1} * ${tala2} ?`);
-			if(guess(svar) === (tala1 - tala2)) {
+		tala2 = tala1 * randomNumber(1,10);
+		svar = prompt(`Hvað er ${tala1} / ${tala2} ?`);
+			if(guess(svar) === (tala1 / tala2)) {
 				return true;
 			} else if(guess(svar) === null) {
 				return null;
@@ -121,7 +121,7 @@ switch(spurning) {
 
 	case 4: 
 		tala1 = randomNumber(2,10);
-		tala2 = tala2 * randomNumber(2,10);
+		tala2 = randomNumber(2,10);
 		svar = prompt(`Hvað er ${tala1} * ${tala2} ?`);
 			if(guess(svar) === (tala1 * tala2)) {
 				return true;
