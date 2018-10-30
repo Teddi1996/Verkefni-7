@@ -13,7 +13,10 @@ const GAMES_TO_PLAY = 10;
  * Eftir leik er notanda boðið að spila annan leik, ef ekki hættir forrit.
  */
 function start() {
-  villa;
+  alert('Markmiðið er að svara eins mörgum rétt og hægt er af 10 dæmum');
+  do {
+    play();
+  } while(confirm('Spila annan ?'));
 }
 
 /**
@@ -28,6 +31,31 @@ function start() {
  *
  */
 function play() {
+var date1 = new Date();
+let time = 0;
+let spilun = 0;
+let stats = 0;
+
+do {
+	let result = ask();
+	var date2 = new Date();
+	time = date2 - date1;
+
+	if (result == true) {
+		stats++;
+		spilun++;
+	} else if (result == false) {
+		spilun++;
+	} else if( result === null ) {
+		return alert('Hætt í leik');
+	}
+   }	
+
+	while (spilun < GAMES_TO_PLAY) {
+	}
+
+	avg = stats/(time/1000);
+	alert('Þú svaraðir ' + stats + ' spurningum rétt af 10 á ' + (time/1000).toFixed(4) + ' sekúndum.');
 }
 
 /**
@@ -45,7 +73,79 @@ function play() {
  * Sniðugt væri að færa það að búa til spurningu í nýtt fall sem ask() kallar í.
  */
 function ask() {
+let spurning = randomNumber(1, 4);
+let tala1 = 0;
+let tala2 = 0;
+let string1 = tala1.toString();
+let string2 = tala2.toString();
+
+switch(spurning) {
+	case 1: 
+		tala1 = randomNumber(1,100);
+		tala2 = randomNumber(1,100);
+		var svar = prompt(`Hvað er ${tala1} + ${tala2} ?`);
+			if(guess(svar) === (tala1 + tala2)) {
+				return true;
+			} else if(guess(svar) === null) {
+				return null;
+			} else {
+				return false;
+			}
+		break;
+
+	case 2: 
+		tala1 = randomNumber(1,100);
+		tala2 = randomNumber(1,100);
+		svar = prompt(`Hvað er ${tala1} - ${tala2} ?`);
+			if(guess(svar) === (tala1 - tala2)) {
+				return true;
+			} else if(guess(svar) === null) {
+				return null; 
+			} else {
+				return false;
+			}
+		break;
+	
+	case 3: 
+		tala1 = randomNumber(1,10);
+		tala2 = randomNumber(1,10);
+		svar = prompt(`Hvað er ${tala1} * ${tala2} ?`);
+			if(guess(svar) === (tala1 - tala2)) {
+				return true;
+			} else if(guess(svar) === null) {
+				return null;
+			} else {
+				return false;
+			}
+		break;
+
+	case 4: 
+		tala1 = randomNumber(2,10);
+		tala2 = tala2 * randomNumber(2,10);
+		svar = prompt(`Hvað er ${tala1} * ${tala2} ?`);
+			if(guess(svar) === (tala1 * tala2)) {
+				return true;
+			} else if (guess(svar) === null) {
+				return null; 
+			} else {
+				return false; 
+			}
+		break;
+	default: 
+		alert('villa');
+		break;
+	} 
+
 }
+
+function guess(input) {
+	const parse = parseInt(input, 10);
+
+	if(isNaN(parse)) {
+		return null;
+	} 
+	return parse; 
+} 
 
 /**
  * Skilar tölu af handahófi á bilinu [min, max]
